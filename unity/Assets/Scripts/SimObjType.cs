@@ -246,7 +246,7 @@ public enum SimObjType : int
 	HandTowelHolder = 142,
 	Ladle = 143,
 	WineBottle = 144,
-
+	Door = 145,
 
 
 	
