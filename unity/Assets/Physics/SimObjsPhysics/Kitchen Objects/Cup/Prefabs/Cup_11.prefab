@@ -970,6 +970,7 @@ GameObject:
   - component: {fileID: 1505713029058367}
   - component: {fileID: 2167327196004469940}
   - component: {fileID: 4370776341344642189}
+  - component: {fileID: 22585139}
   m_Layer: 8
   m_Name: Cup_11
   m_TagString: SimObjPhysics
@@ -1052,6 +1053,7 @@ MonoBehaviour:
   salientMaterials: 04000000
   CurrentTemperature: 0
   HowManySecondsUntilRoomTemp: 10
+  inMotion: 0
   ContainedObjectReferences: []
 --- !u!54 &54585821202343174
 Rigidbody:
@@ -1126,9 +1128,23 @@ MonoBehaviour:
     type: 3}
   ImpulseThreshold: 3.5
   HighFrictionImpulseOffset: 2
+  readytobreak: 1
   broken: 0
   breakType: 0
   MaterialSwapObjects: []
+--- !u!114 &22585139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505713029058366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5a1a0092109e854291127a7b859f815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 10
 --- !u!1 &1583732950843778
 GameObject:
   m_ObjectHideFlags: 0
