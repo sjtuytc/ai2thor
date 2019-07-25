@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class spawner : MonoBehaviour
 {
-
+    public string objectTypeToScreenshot;
     public Transform spawnPositionA;
     public Transform spawnPositionB;
     GameObject[] allObjects;
@@ -18,6 +18,8 @@ public class spawner : MonoBehaviour
     bool cont = true;
     int aNum = 0;
     int bNum = 1;
+    string spawneeAMat;
+    string spawneeBMat;
 
     private void Awake()
     {
@@ -45,7 +47,7 @@ public class spawner : MonoBehaviour
             if (allObjects[i].GetComponent<SimObjPhysics>() != null)
             {
                 //Debug.Log(allObjects[i]);
-                if (allObjects[i].GetComponent<SimObjPhysics>().Type == SimObjType.Cup)
+                if (allObjects[i].GetComponent<SimObjPhysics>().Type.ToString() == objectTypeToScreenshot)
                 {
                     //Debug.Log("Hello World 2");
 
@@ -70,6 +72,12 @@ public class spawner : MonoBehaviour
             spawneeB = comparedObjects[bNum];
             sceneSpawnedB = Instantiate(spawneeB, spawnPositionB.position, spawnPositionB.rotation);
 
+            spawneeAMat = spawneeA.GetComponent<SimObjPhysics>().salientMaterials[0].ToString();
+            spawneeBMat = spawneeB.GetComponent<SimObjPhysics>().salientMaterials[0].ToString();
+
+            Debug.Log(spawneeAMat);
+            Debug.Log(spawneeBMat);
+
             StartCoroutine(Screenshot());
             cont = false;
         }
@@ -77,23 +85,25 @@ public class spawner : MonoBehaviour
 
     IEnumerator Screenshot()
     {
-        ScreenCapture.CaptureScreenshot("Assets/Mechanical_Turk_Test/Screenshots/A_" + spawneeA.name + "_B_" + spawneeB.name + ".jpg", 2);
-        yield return new WaitForSeconds(1);
-        Debug.Log("Twenty seconds have passed...");
+        ScreenCapture.CaptureScreenshot("Assets/Mechanical_Turk_Test/Screenshots/" + objectTypeToScreenshot + "/A_" + spawneeA.name + "_" + spawneeAMat + "-B_" + spawneeB.name + "_" + spawneeBMat + ".jpg", 1);
+        yield return new WaitForSeconds(0.001f);
         Destroy(sceneSpawnedA);
         Destroy(sceneSpawnedB);
 
-        if (bNum == comparedObjectsSize-1)
+        if (aNum != comparedObjectsSize - 2)
         {
-            aNum++;
-            bNum = aNum + 1;
-        }
+            if (bNum == comparedObjectsSize - 1)
+            {
+                aNum++;
+                bNum = aNum + 1;
+            }
 
-        else
-        {
-            bNum++;
-        }
+            else
+            {
+                bNum++;
+            }
 
-        cont = true;
+            cont = true;
+        }
     }
 }

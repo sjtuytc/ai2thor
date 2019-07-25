@@ -3628,6 +3628,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22104360e0ef7df459e8017c1cee36d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectTypeToScreenshot: Cup
   spawnPositionA: {fileID: 1207804568}
   spawnPositionB: {fileID: 1006248114}
 --- !u!1001 &859882472
