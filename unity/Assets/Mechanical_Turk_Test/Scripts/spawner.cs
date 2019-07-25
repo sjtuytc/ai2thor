@@ -1,28 +1,99 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class spawner : MonoBehaviour
 {
 
-    public GameObject[] comparables;
-    
+    public Transform spawnPositionA;
+    public Transform spawnPositionB;
+    GameObject[] allObjects;
+    GameObject[] comparedObjects = new GameObject[40];
+    int comparedObjectsSize;
+    GameObject spawneeA;
+    GameObject spawneeB;
+    GameObject sceneSpawnedA;
+    GameObject sceneSpawnedB;
+    bool cont = true;
+    int aNum = 0;
+    int bNum = 1;
 
-    public Transform spawnPos;
-    public GameObject spawnee;
+    private void Awake()
+    {
+        //Debug.Log("Hello World 1");
 
-    // Update is called once per frame
+
+        //private int f = 0;
+
+        allObjects = Resources.LoadAll("SimObjsPhysics", typeof(GameObject)).Cast<GameObject>().ToArray();
+
+        //Debug.Log(allObjects.Length);
+
+        int n = 0;
+
+        for (int i = 0; i < allObjects.Length; i++)
+        {
+            //Debug.Log("Hello World 2");
+            //Debug.Log(currentObject.name);
+
+            if (allObjects[i].name == "Cup_11")
+            {
+                //Debug.Log("Hard-check: " + allObjects[i]);
+            }
+
+            if (allObjects[i].GetComponent<SimObjPhysics>() != null)
+            {
+                //Debug.Log(allObjects[i]);
+                if (allObjects[i].GetComponent<SimObjPhysics>().Type == SimObjType.Cup)
+                {
+                    //Debug.Log("Hello World 2");
+
+                    comparedObjects[n] = allObjects[i];
+                    n++;
+
+                }
+            }
+        }
+
+        comparedObjectsSize = n;
+        //Debug.Log("Size: " + comparedObjectsSize);
+    }
+
     void Update()
     {
-        GameObject a = spawnee;
-
-        if (Input.GetMouseButton(0))
+        if (cont == true)
         {
-            Instantiate(spawnee, spawnPos.position, spawnPos.rotation);
-            ScreenCapture.CaptureScreenshot("Assets/Mechanical_Turk_Test/Screenshots/A_" + a.name + "_B_" + ".jpg", 2);
+            spawneeA = comparedObjects[aNum];
+            sceneSpawnedA = Instantiate(spawneeA, spawnPositionA.position, spawnPositionA.rotation);
+
+            spawneeB = comparedObjects[bNum];
+            sceneSpawnedB = Instantiate(spawneeB, spawnPositionB.position, spawnPositionB.rotation);
+
+            StartCoroutine(Screenshot());
+            cont = false;
         }
     }
+
+    IEnumerator Screenshot()
+    {
+        ScreenCapture.CaptureScreenshot("Assets/Mechanical_Turk_Test/Screenshots/A_" + spawneeA.name + "_B_" + spawneeB.name + ".jpg", 2);
+        yield return new WaitForSeconds(1);
+        Debug.Log("Twenty seconds have passed...");
+        Destroy(sceneSpawnedA);
+        Destroy(sceneSpawnedB);
+
+        if (bNum == comparedObjectsSize-1)
+        {
+            aNum++;
+            bNum = aNum + 1;
+        }
+
+        else
+        {
+            bNum++;
+        }
+
+        cont = true;
+    }
 }
-
-
-//C:/Users/Eli VanderBilt/Documents/GitHub/ai2thor/unity/
