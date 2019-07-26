@@ -36,24 +36,12 @@ public class spawner : MonoBehaviour
 
         for (int i = 0; i < allObjects.Length; i++)
         {
-            //Debug.Log("Hello World 2");
-            //Debug.Log(currentObject.name);
-
-            if (allObjects[i].name == "Cup_11")
-            {
-                //Debug.Log("Hard-check: " + allObjects[i]);
-            }
-
             if (allObjects[i].GetComponent<SimObjPhysics>() != null)
             {
-                //Debug.Log(allObjects[i]);
                 if (allObjects[i].GetComponent<SimObjPhysics>().Type.ToString() == objectTypeToScreenshot)
                 {
-                    //Debug.Log("Hello World 2");
-
                     comparedObjects[n] = allObjects[i];
                     n++;
-
                 }
             }
         }
