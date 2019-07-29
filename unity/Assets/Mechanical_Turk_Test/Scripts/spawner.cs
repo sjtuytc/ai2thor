@@ -13,6 +13,8 @@ public class spawner : MonoBehaviour
     int comparedObjectsSize;
     GameObject spawneeA;
     GameObject spawneeB;
+    float spawnHeightA;
+    float spawnHeightB;
     GameObject sceneSpawnedA;
     GameObject sceneSpawnedB;
     bool cont = true;
@@ -55,16 +57,22 @@ public class spawner : MonoBehaviour
         if (cont == true)
         {
             spawneeA = comparedObjects[aNum];
+
             sceneSpawnedA = Instantiate(spawneeA, spawnPositionA.position, spawnPositionA.rotation);
+            spawnHeightA = sceneSpawnedA.transform.Find("BoundingBox").GetComponent<BoxCollider>().size.y / 2;
+            sceneSpawnedA.transform.position = new Vector3(spawnPositionA.position.x, spawnPositionA.position.y + spawnHeightA, spawnPositionA.position.z);
 
             spawneeB = comparedObjects[bNum];
+
             sceneSpawnedB = Instantiate(spawneeB, spawnPositionB.position, spawnPositionB.rotation);
+            spawnHeightB = sceneSpawnedB.transform.Find("BoundingBox").GetComponent<BoxCollider>().size.y / 2;
+            sceneSpawnedB.transform.position = new Vector3(spawnPositionB.position.x, spawnPositionB.position.y + spawnHeightB, spawnPositionB.position.z);
 
             spawneeAMat = spawneeA.GetComponent<SimObjPhysics>().salientMaterials[0].ToString();
             spawneeBMat = spawneeB.GetComponent<SimObjPhysics>().salientMaterials[0].ToString();
 
-            Debug.Log(spawneeAMat);
-            Debug.Log(spawneeBMat);
+            //Debug.Log(spawneeAMat);
+            //Debug.Log(spawneeBMat);
 
             StartCoroutine(Screenshot());
             cont = false;
@@ -73,8 +81,9 @@ public class spawner : MonoBehaviour
 
     IEnumerator Screenshot()
     {
+        yield return new WaitForSeconds(0.1f);
         ScreenCapture.CaptureScreenshot("Assets/Mechanical_Turk_Test/Screenshots/" + objectTypeToScreenshot + "/A_" + spawneeA.name + "_" + spawneeAMat + "-B_" + spawneeB.name + "_" + spawneeBMat + ".jpg", 1);
-        yield return new WaitForSeconds(0.001f);
+        yield return new WaitForSeconds(0.01f);
         Destroy(sceneSpawnedA);
         Destroy(sceneSpawnedB);
 

@@ -836,6 +836,7 @@ MonoBehaviour:
   salientMaterials: 000000000200000003000000
   CurrentTemperature: 0
   HowManySecondsUntilRoomTemp: 10
+  inMotion: 0
   ContainedObjectReferences: []
 --- !u!54 &54907053069643906
 Rigidbody:
@@ -846,7 +847,7 @@ Rigidbody:
   m_GameObject: {fileID: 1488067499411056}
   serializedVersion: 2
   m_Mass: 0.8
-  m_Drag: 0.5
+  m_Drag: 0.51
   m_AngularDrag: 100
   m_UseGravity: 1
   m_IsKinematic: 0

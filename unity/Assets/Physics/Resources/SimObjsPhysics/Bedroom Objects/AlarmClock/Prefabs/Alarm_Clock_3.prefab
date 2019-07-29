@@ -870,6 +870,7 @@ MonoBehaviour:
   salientMaterials: 000000000200000003000000
   CurrentTemperature: 0
   HowManySecondsUntilRoomTemp: 10
+  inMotion: 0
   ContainedObjectReferences: []
 --- !u!54 &54364562405481844
 Rigidbody:
@@ -880,7 +881,7 @@ Rigidbody:
   m_GameObject: {fileID: 1554202462770810}
   serializedVersion: 2
   m_Mass: 0.8
-  m_Drag: 0.5
+  m_Drag: 0.51
   m_AngularDrag: 100
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -1362,7 +1363,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1800187347253762}
-  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
+  m_LocalRotation: {x: -0, y: -0.0000001490116, z: -0, w: -1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1372,7 +1373,7 @@ Transform:
   - {fileID: 4464408997814106}
   m_Father: {fileID: 4016782437792348}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -360, z: 0}
 --- !u!33 &33722259981808052
 MeshFilter:
   m_ObjectHideFlags: 0
